@@ -1,0 +1,50 @@
+<div class="bg-blue-200 p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold mb-4">Registrar Pedido</h2>
+    
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Nombre:</label>
+      <input type="text" [(ngModel)]="nombre" class="w-full p-2 border rounded-lg" />
+    </div>
+    
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Dirección:</label>
+      <input type="text" [(ngModel)]="direccion" class="w-full p-2 border rounded-lg" />
+    </div>
+    
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Teléfono:</label>
+      <input type="text" [(ngModel)]="telefono" class="w-full p-2 border rounded-lg" />
+    </div>
+  
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-2">Tamaño de Pizza:</label>
+      <div class="flex gap-4">
+        <label><input type="radio" [(ngModel)]="tamano" value="Chica" /> Chica $40</label>
+        <label><input type="radio" [(ngModel)]="tamano" value="Mediana" /> Mediana $80</label>
+        <label><input type="radio" [(ngModel)]="tamano" value="Grande" /> Grande $120</label>
+      </div>
+    </div>
+  
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-2">Ingredientes:</label>
+      <div class="flex gap-4">
+        <label><input type="checkbox" [(ngModel)]="ingrediente1" [value]="'Jamón'" /> Jamón $10</label>
+        <label><input type="checkbox" [(ngModel)]="ingrediente2" [value]="'Piña'" /> Piña $10</label>
+        <label><input type="checkbox" [(ngModel)]="ingrediente3" [value]="'Champiñones'" /> Champiñones $10</label>
+      </div>
+    </div>
+  
+    <!-- Número de Pizzas -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Número de Pizzas:</label>
+      <input type="number" [(ngModel)]="numeroPizzas" min="1" class="w-full p-2 border rounded-lg" />
+    </div>
+  
+    <!-- Botón Agregar -->
+    <div class="text-right">
+      <button (click)="agregar()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600">
+        Agregar
+      </button>
+    </div>
+  </div>
+  

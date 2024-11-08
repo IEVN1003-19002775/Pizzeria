@@ -1,0 +1,15 @@
+<div class="bg-yellow-100 p-4 rounded-lg shadow-md mt-6">
+    <h2 class="text-xl font-semibold mb-4">Ventas del Día</h2>
+  
+    <ul>
+      <li *ngFor="let venta of ventas" class="border-b py-2">
+        <span class="font-medium">{{ venta.nombre }}</span>: 
+        total <span class="font-medium">{{ venta.total | currency }}</span>
+      </li>
+    </ul>
+  
+    <div class="mt-4 text-lg font-semibold">
+      Ventas totales del día: <span>{{ totalVentas | currency }}</span>
+    </div>
+  </div>
+  
