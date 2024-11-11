@@ -13,4 +13,9 @@ import VentasComponent from './pizzcomp/ventas/ventas.component';
 })
 export class AppComponent {
   title = 'pizzeria';
+  pedidos: any[] = []; // Lista de pedidos para mostrar en la tabla
+
+  agregarPedido(pedido: any) {
+    this.pedidos.push(pedido); // Agrega el pedido a la lista
+  }
 }

@@ -2,6 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { VentasService } from '../../ventas.service';
 import { CommonModule } from '@angular/common';
 
+interface Pedido {
+  nombre: string;
+  tamanoPizza: string;
+  ingrediente1: string;
+  ingrediente2: string;
+  ingrediente3: string;
+  numeroPizzas: number;
+  subtotal: number;
+}
+
 @Component({
   selector: 'app-ventas',
   standalone: true,
@@ -10,13 +20,15 @@ import { CommonModule } from '@angular/common';
   styles: ``
 })
 export default class VentasComponent implements OnInit{
-  ventas: any[] = [];
-  totalVentas = 0;
-
-  constructor(private ventasService: VentasService) {}
+  pedidos: Pedido[] = [];
+  totalGeneral: number = 0;
 
   ngOnInit() {
-    this.ventas = this.ventasService.obtenerVentas();
-    this.totalVentas = this.ventas.reduce((total, venta) => total + venta.total, 0);
+    // Recuperar pedidos desde localStorage al cargar el componente
+    const pedidosGuardados = JSON.parse(localStorage.getItem('pedidos') || '[]');
+    this.pedidos = pedidosGuardados;
+
+    // Calcular el total general de todas las ventas
+    this.totalGeneral = this.pedidos.reduce((total, pedido) => total + pedido.subtotal, 0);
   }
 }

@@ -28,9 +28,15 @@
     <div class="mb-4">
       <label class="block text-sm font-medium mb-2">Ingredientes:</label>
       <div class="flex gap-4">
-        <label><input type="checkbox" [(ngModel)]="ingrediente1" [value]="'Jamón'" /> Jamón $10</label>
-        <label><input type="checkbox" [(ngModel)]="ingrediente2" [value]="'Piña'" /> Piña $10</label>
-        <label><input type="checkbox" [(ngModel)]="ingrediente3" [value]="'Champiñones'" /> Champiñones $10</label>
+        <label>
+          <input type="checkbox" (change)="toggleIngrediente('Jamón', $any($event.target).checked)" /> Jamón $10
+        </label>
+        <label>
+          <input type="checkbox" (change)="toggleIngrediente('Piña', $any($event.target).checked)" /> Piña $10
+        </label>
+        <label>
+          <input type="checkbox" (change)="toggleIngrediente('Champiñones', $any($event.target).checked)" /> Champiñones $10
+        </label>
       </div>
     </div>
   

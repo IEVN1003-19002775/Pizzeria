@@ -1,36 +1,32 @@
-<div class="bg-gray-100 p-4 rounded-lg shadow-md mt-6">
-    <h2 class="text-xl font-semibold mb-4">Detalles del Pedido</h2>
-  
-    <table class="w-full text-left border-collapse">
-      <thead>
-        <tr>
-          <th class="p-2 border-b">Tamaño</th>
-          <th class="p-2 border-b">Ingredientes</th>
-          <th class="p-2 border-b">Num. Pizzas</th>
-          <th class="p-2 border-b">Subtotal</th>
-          <th class="p-2 border-b">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pedido of pedidos; let i = index" class="border-t">
-          <td class="p-2">{{ pedido.tamano }}</td>
-          <td class="p-2">{{ pedido.ingredientes.join(', ') }}</td>
-          <td class="p-2">{{ pedido.numeroPizzas }}</td>
-          <td class="p-2">{{ pedido.subtotal | currency }}</td>
-          <td class="p-2">
-            <button (click)="quitar(i)" class="text-red-500 hover:text-red-700">
-              Quitar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <!-- Botón Terminar -->
-    <div class="text-right mt-4">
-      <button (click)="terminar()" class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">
-        Terminar Pedido
-      </button>
-    </div>
+<div class="p-4">
+  <h3 class="text-xl font-semibold mb-4">Lista de Pedidos</h3>
+  <table class="min-w-full border border-gray-300">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="px-4 py-2 border">Nombre</th>
+        <th class="px-4 py-2 border">Tamaño</th>
+        <th class="px-4 py-2 border">Ingredientes</th>
+        <th class="px-4 py-2 border">Cantidad</th>
+        <th class="px-4 py-2 border">Subtotal</th>
+        <th class="px-4 py-2 border">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pedido of pedidos; let i = index">
+        <td class="px-4 py-2 border">{{ pedido.nombre }}</td>
+        <td class="px-4 py-2 border">{{ pedido.tamanoPizza }}</td>
+        <td class="px-4 py-2 border">{{ pedido.ingrediente1 + ' ' + pedido.ingrediente2 + ' ' + pedido.ingrediente3 }}</td>
+        <td class="px-4 py-2 border">{{ pedido.numeroPizzas }}</td>
+        <td class="px-4 py-2 border">{{ pedido.subtotal | currency }}</td>
+        <td class="px-4 py-2 border">
+          <button (click)="quitar(i)" class="text-red-600 hover:text-red-800">Quitar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="mt-4">
+    <button (click)="terminarPedido()" class="bg-blue-600 text-white px-4 py-2 rounded">Terminar Pedido</button>
   </div>
+</div>
   
