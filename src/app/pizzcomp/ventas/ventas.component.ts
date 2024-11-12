@@ -39,8 +39,6 @@ export default class VentasComponent implements OnInit {
   ventas() {
     const pedidosGuardados: Pedido[] = JSON.parse(localStorage.getItem('pedidos') || '[]');
     this.pedidos = pedidosGuardados;
-
-    // Agrupar pedidos por cliente y calcular los totales
     const clienteMap: { [key: string]: ClienteResumen } = {};
 
     this.pedidos.forEach((pedido) => {
@@ -58,7 +56,6 @@ export default class VentasComponent implements OnInit {
       }
     });
 
-    // Convertir el map a un array y calcular el total general
     this.clientes = Object.values(clienteMap);
     this.totalGeneral = this.clientes.reduce((total, cliente) => total + cliente.totalCompra, 0);
   }

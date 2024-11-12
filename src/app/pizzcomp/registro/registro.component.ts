@@ -25,7 +25,7 @@ export default class RegistroComponent {
   formularioIncompleto: boolean = false;
 
 
-  @Output() pedidoAgregado = new EventEmitter<any>(); // Emisor para enviar los datos del pedido
+  @Output() pedidoAgregado = new EventEmitter<any>(); 
   
   agregar() {
     if (this.nombre && this.direccion && this.telefono && this.tamano && (this.ingrediente1 || this.ingrediente2 || this.ingrediente3)) {
@@ -43,14 +43,13 @@ export default class RegistroComponent {
 
       this.pedidoAgregado.emit(pedido);
       this.limpiarCampos();
-      this.formularioIncompleto = false; // Resetear error
+      this.formularioIncompleto = false;
     } else {
-      this.formularioIncompleto = true; // Mostrar mensaje de error
+      this.formularioIncompleto = true;
     }
   }
 
   calcularSubtotal() {
-    // Calcular el subtotal en base al tamaño y los ingredientes seleccionados
     let subtotal = 0;
     switch (this.tamano) {
       case 'Chica': subtotal += 40; break;

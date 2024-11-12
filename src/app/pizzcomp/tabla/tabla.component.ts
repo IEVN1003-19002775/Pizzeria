@@ -26,7 +26,6 @@ export default class TablaComponent {
   @Output() limpiarCampos = new EventEmitter<void>();
   @Output() verVentas = new EventEmitter<void>();
 
-  // Métodos
   quitar(index: number) {
     this.pedidos.splice(index, 1);
     this.quitarPedido.emit(index);

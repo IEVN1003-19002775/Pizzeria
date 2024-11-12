@@ -1,5 +1,5 @@
-<div class="p-4">
-  <h3 class="text-xl font-semibold mb-4">Registro de Pedido</h3>
+<div class="p-8">
+  <h3 class="text-xl font-bold mb-4">Registro de Pedido</h3>
   
   <div class="mb-4">
     <label class="block text-sm font-medium mb-2">Nombre:</label>
@@ -40,13 +40,11 @@
       </div>
     </div>
   
-    <!-- Número de Pizzas -->
     <div class="mb-4">
       <label class="block text-sm font-medium">Número de Pizzas:</label>
       <input type="number" [(ngModel)]="numeroPizzas" min="1" class="w-full p-2 border rounded-lg" />
     </div>
-  
-    <!-- Botón Agregar -->
+
     <div class="text-right">
       <button (click)="agregar()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600">
         Agregar

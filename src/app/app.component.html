@@ -33,19 +33,16 @@
   </nav>
   <br>
   <router-outlet/>
-  <div class="flex flex-col h-screen">
-    <div class="flex-1 bg-blue-500">
+  <div class="flex flex-col h-auto">
+    <div class="flex-1 bg-gray-300">
       <app-registro #registroComponent (pedidoAgregado)="agregarPedido($event)" ></app-registro>
     </div>
   
     <div class="flex flex-row h-1/2">
-      <div class="flex-1 bg-blue-500">
-        <app-tabla [pedidos]="pedidos"
-         (limpiarCampos)="registroComponent.limpiarFormulario()" 
-         (verVentas)="ventasComponent.ventas()"
-         class="col-span-2"></app-tabla>
+      <div class="flex-1 bg-gray-300">
+        <app-tabla [pedidos]="pedidos" (limpiarCampos)="registroComponent.limpiarFormulario()" (verVentas)="ventasComponent.ventas()" class="col-span-2"></app-tabla>
       </div>
-      <div class="flex-1 bg-blue-500">
+      <div class="flex-1 bg-gray-300">
         <app-ventas #ventasComponent></app-ventas>
       </div>
     </div>
