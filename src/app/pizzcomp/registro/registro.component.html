@@ -1,20 +1,20 @@
-<div class="bg-blue-200 p-4 rounded-lg shadow-md">
-    <h2 class="text-xl font-semibold mb-4">Registrar Pedido</h2>
-    
-    <div class="mb-4">
-      <label class="block text-sm font-medium">Nombre:</label>
-      <input type="text" [(ngModel)]="nombre" class="w-full p-2 border rounded-lg" />
-    </div>
-    
-    <div class="mb-4">
-      <label class="block text-sm font-medium">Dirección:</label>
-      <input type="text" [(ngModel)]="direccion" class="w-full p-2 border rounded-lg" />
-    </div>
-    
-    <div class="mb-4">
-      <label class="block text-sm font-medium">Teléfono:</label>
-      <input type="text" [(ngModel)]="telefono" class="w-full p-2 border rounded-lg" />
-    </div>
+<div class="p-4">
+  <h3 class="text-xl font-semibold mb-4">Registro de Pedido</h3>
+  
+  <div class="mb-4">
+    <label class="block text-sm font-medium mb-2">Nombre:</label>
+    <input type="text" [(ngModel)]="nombre" class="border rounded px-2 py-1 w-full" required />
+  </div>
+  
+  <div class="mb-4">
+    <label class="block text-sm font-medium mb-2">Dirección:</label>
+    <input type="text" [(ngModel)]="direccion" class="border rounded px-2 py-1 w-full" required />
+  </div>
+  
+  <div class="mb-4">
+    <label class="block text-sm font-medium mb-2">Teléfono:</label>
+    <input type="text" [(ngModel)]="telefono" class="border rounded px-2 py-1 w-full" required />
+  </div>
   
     <div class="mb-4">
       <label class="block text-sm font-medium mb-2">Tamaño de Pizza:</label>
@@ -51,6 +51,10 @@
       <button (click)="agregar()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600">
         Agregar
       </button>
+    </div>
+
+    <div *ngIf="formularioIncompleto" class="text-red-600 mt-2">
+      <p>Completa todos los campos y selecciona al menos un ingrediente.</p>
     </div>
   </div>
   

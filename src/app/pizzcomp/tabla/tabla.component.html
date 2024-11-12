@@ -3,7 +3,6 @@
   <table class="min-w-full border border-gray-300">
     <thead class="bg-gray-100">
       <tr>
-        <th class="px-4 py-2 border">Nombre</th>
         <th class="px-4 py-2 border">Tamaño</th>
         <th class="px-4 py-2 border">Ingredientes</th>
         <th class="px-4 py-2 border">Cantidad</th>
@@ -13,7 +12,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let pedido of pedidos; let i = index">
-        <td class="px-4 py-2 border">{{ pedido.nombre }}</td>
         <td class="px-4 py-2 border">{{ pedido.tamanoPizza }}</td>
         <td class="px-4 py-2 border">{{ pedido.ingrediente1 + ' ' + pedido.ingrediente2 + ' ' + pedido.ingrediente3 }}</td>
         <td class="px-4 py-2 border">{{ pedido.numeroPizzas }}</td>

@@ -22,14 +22,15 @@ export default class RegistroComponent {
   ingrediente3: string = '';
   numeroPizzas: number = 1;
 
+  formularioIncompleto: boolean = false;
+
 
   @Output() pedidoAgregado = new EventEmitter<any>(); // Emisor para enviar los datos del pedido
   
-
   agregar() {
-    // Crear el objeto de pedido con los datos ingresados
-    const pedido = {
-      nombre: this.nombre,
+    if (this.nombre && this.direccion && this.telefono && this.tamano && (this.ingrediente1 || this.ingrediente2 || this.ingrediente3)) {
+      const pedido = {
+        nombre: this.nombre,
       direccion: this.direccion,
       telefono: this.telefono,
       tamanoPizza: this.tamano,
@@ -38,13 +39,14 @@ export default class RegistroComponent {
       ingrediente3: this.ingrediente3,
       numeroPizzas: this.numeroPizzas,
       subtotal: this.calcularSubtotal()
-    };
+      };
 
-    // Emitir el pedido al componente padre
-    this.pedidoAgregado.emit(pedido);
-
-    // Limpiar campos si es necesario
-    this.limpiarCampos();
+      this.pedidoAgregado.emit(pedido);
+      this.limpiarCampos();
+      this.formularioIncompleto = false; // Resetear error
+    } else {
+      this.formularioIncompleto = true; // Mostrar mensaje de error
+    }
   }
 
   calcularSubtotal() {
@@ -73,6 +75,15 @@ export default class RegistroComponent {
     }
   }
   limpiarCampos() {
+    this.tamano = '';
+    this.ingrediente1 = '';
+    this.ingrediente2 = '';
+    this.ingrediente3 = '';
+    this.numeroPizzas = 1;
+    
+  }
+
+  limpiarFormulario() {
     this.nombre = '';
     this.direccion = '';
     this.telefono = '';
@@ -81,7 +92,6 @@ export default class RegistroComponent {
     this.ingrediente2 = '';
     this.ingrediente3 = '';
     this.numeroPizzas = 1;
-    
   }
 
   

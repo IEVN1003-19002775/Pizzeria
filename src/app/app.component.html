@@ -35,15 +35,18 @@
   <router-outlet/>
   <div class="flex flex-col h-screen">
     <div class="flex-1 bg-blue-500">
-      <app-registro (pedidoAgregado)="agregarPedido($event)" ></app-registro>
+      <app-registro #registroComponent (pedidoAgregado)="agregarPedido($event)" ></app-registro>
     </div>
   
     <div class="flex flex-row h-1/2">
       <div class="flex-1 bg-blue-500">
-        <app-tabla [pedidos]="pedidos" class="col-span-2"></app-tabla>
+        <app-tabla [pedidos]="pedidos"
+         (limpiarCampos)="registroComponent.limpiarFormulario()" 
+         (verVentas)="ventasComponent.ventas()"
+         class="col-span-2"></app-tabla>
       </div>
       <div class="flex-1 bg-blue-500">
-        <app-ventas></app-ventas>
+        <app-ventas #ventasComponent></app-ventas>
       </div>
     </div>
   </div>

@@ -3,6 +3,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 interface Pedido {
   nombre: string;
+  direccion: string;
+  telefono: string;
   tamanoPizza: string;
   ingrediente1: string;
   ingrediente2: string;
@@ -19,53 +21,35 @@ interface Pedido {
   styles: ``
 })
 export default class TablaComponent {
-  // Recibir pedidos desde el componente padre
   @Input() pedidos: Pedido[] = [];
-  @Output() pedidoTerminado = new EventEmitter<void>(); // Para notificar cuando se completa el pedido
   @Output() quitarPedido = new EventEmitter<number>();
+  @Output() limpiarCampos = new EventEmitter<void>();
+  @Output() verVentas = new EventEmitter<void>();
 
-  // Variables para capturar datos del pedido actual
-  nombre: string = '';
-  direccion: string = '';
-  telefono: string = '';
-  tamano: string = '';
-  ingrediente1: string = '';
-  ingrediente2: string = '';
-  ingrediente3: string = '';
-  numeroPizzas: number = 1;
-  subtotal: number = 0;
-
+  // Métodos
   quitar(index: number) {
-    this.pedidos.splice(index, 1); // Remover pedido del array
-    this.quitarPedido.emit(index); // Emitir evento al componente padre
+    this.pedidos.splice(index, 1);
+    this.quitarPedido.emit(index);
   }
 
-  // Terminar y guardar el pedido
   terminarPedido() {
-    const pedido: Pedido = {
-      nombre: this.nombre,
-      tamanoPizza: this.tamano,
-      ingrediente1: this.ingrediente1,
-      ingrediente2: this.ingrediente2,
-      ingrediente3: this.ingrediente3,
-      numeroPizzas: this.numeroPizzas,
-      subtotal: this.subtotal
-    };
-
-    // Calcular el costo total de los pedidos en pantalla
-    const total = this.pedidos.reduce((acc, pedido) => acc + pedido.subtotal, 0) + pedido.subtotal;
+    const total = this.pedidos.reduce((acc, pedido) => acc + pedido.subtotal, 0);
     const confirmacion = confirm(`El costo total es ${total}. ¿Deseas finalizar el pedido?`);
 
     if (confirmacion) {
       this.guardarPedidoEnLocalStorage(this.pedidos);
+      this.pedidos = [];
+      this.limpiarCampos.emit();
+      this.verVentas.emit();
     } else {
       alert('Puedes editar el pedido antes de finalizar.');
     }
   }
 
-  guardarPedidoEnLocalStorage(pedido: any) {
+  private guardarPedidoEnLocalStorage(nuevosPedidos: Pedido[]) {
     const pedidosGuardados = JSON.parse(localStorage.getItem('pedidos') || '[]');
-    pedidosGuardados.push(pedido);
-    localStorage.setItem('pedidos', JSON.stringify(pedidosGuardados));
+    const pedidosActualizados = [...pedidosGuardados, ...nuevosPedidos];
+    localStorage.setItem('pedidos', JSON.stringify(pedidosActualizados));
   }
 }
+

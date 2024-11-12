@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { VentasService } from '../../ventas.service';
 import { CommonModule } from '@angular/common';
 
 interface Pedido {
   nombre: string;
+  direccion: string;
+  telefono: string;
   tamanoPizza: string;
   ingrediente1: string;
   ingrediente2: string;
   ingrediente3: string;
   numeroPizzas: number;
   subtotal: number;
+}
+
+interface ClienteResumen {
+  nombre: string;
+  direccion: string;
+  telefono: string;
+  totalCompra: number;
 }
 
 @Component({
@@ -19,16 +27,39 @@ interface Pedido {
   templateUrl: './ventas.component.html',
   styles: ``
 })
-export default class VentasComponent implements OnInit{
+export default class VentasComponent implements OnInit {
   pedidos: Pedido[] = [];
+  clientes: ClienteResumen[] = [];
   totalGeneral: number = 0;
 
   ngOnInit() {
-    // Recuperar pedidos desde localStorage al cargar el componente
-    const pedidosGuardados = JSON.parse(localStorage.getItem('pedidos') || '[]');
+    
+  }
+
+  ventas() {
+    const pedidosGuardados: Pedido[] = JSON.parse(localStorage.getItem('pedidos') || '[]');
     this.pedidos = pedidosGuardados;
 
-    // Calcular el total general de todas las ventas
-    this.totalGeneral = this.pedidos.reduce((total, pedido) => total + pedido.subtotal, 0);
+    // Agrupar pedidos por cliente y calcular los totales
+    const clienteMap: { [key: string]: ClienteResumen } = {};
+
+    this.pedidos.forEach((pedido) => {
+      const clienteKey = `${pedido.nombre}-${pedido.telefono}-${pedido.direccion}`;
+      
+      if (clienteMap[clienteKey]) {
+        clienteMap[clienteKey].totalCompra += pedido.subtotal;
+      } else {
+        clienteMap[clienteKey] = {
+          nombre: pedido.nombre,
+          direccion: pedido.direccion,
+          telefono: pedido.telefono,
+          totalCompra: pedido.subtotal
+        };
+      }
+    });
+
+    // Convertir el map a un array y calcular el total general
+    this.clientes = Object.values(clienteMap);
+    this.totalGeneral = this.clientes.reduce((total, cliente) => total + cliente.totalCompra, 0);
   }
 }

@@ -1,21 +1,30 @@
-<div class="mt-4">
-  <h2 class="text-xl font-bold mb-4">Listado de Ventas</h2>
-  <table class="w-full border-collapse border border-gray-300">
+<div class="p-4">
+  <h2 class="text-2xl font-semibold mb-4">Ventas Realizadas</h2>
+
+  <table class="w-full border">
     <thead>
-      <tr class="bg-gray-200">
-        <th class="border px-4 py-2">Nombre del Comprador</th>
-        <th class="border px-4 py-2">Total de la Compra</th>
+      <tr>
+        <th class="border px-2 py-1">Nombre</th>
+        <th class="border px-2 py-1">Dirección</th>
+        <th class="border px-2 py-1">Teléfono</th>
+        <th class="border px-2 py-1">Total de Venta</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let pedido of pedidos">
-        <td class="border px-4 py-2">{{ pedido.nombre }}</td>
-        <td class="border px-4 py-2">{{ pedido.subtotal | currency }}</td>
+      <tr *ngFor="let pedido of clientes">
+        <td class="border px-2 py-1">{{ pedido.nombre }}</td>
+        <td class="border px-2 py-1">{{ pedido.direccion }}</td>
+        <td class="border px-2 py-1">{{ pedido.telefono }}</td>
+        <td class="border px-2 py-1">{{ pedido.totalCompra | currency }}</td>
       </tr>
     </tbody>
   </table>
 
-  <div class="mt-4 text-lg font-bold">
-    Total General: {{ totalGeneral | currency }}
+  <div class="mt-4 font-bold text-xl">
+    Total General de Ventas: {{ totalGeneral | currency }}
+  </div>
+
+  <div class="mt-4">
+    <button (click)="ventas()" class="bg-blue-600 text-white px-4 py-2 rounded">Ver ventas</button>
   </div>
 </div>
