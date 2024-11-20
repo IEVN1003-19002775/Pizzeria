@@ -40,7 +40,7 @@
   
     <div class="flex flex-row h-1/2">
       <div class="flex-1 bg-gray-300">
-        <app-tabla [pedidos]="pedidos" (limpiarCampos)="registroComponent.limpiarFormulario()" (verVentas)="ventasComponent.ventas()" class="col-span-2"></app-tabla>
+        <app-tabla [pedidos]="pedidos" (limpiarCampos)="registroComponent.limpiarFormulario()" (verVentas)="ventasComponent.obtenerVentas()" class="col-span-2"></app-tabla>
       </div>
       <div class="flex-1 bg-gray-300">
         <app-ventas #ventasComponent></app-ventas>

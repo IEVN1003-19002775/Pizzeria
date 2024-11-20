@@ -1,4 +1,4 @@
-<div class="p-4">
+<div class="p-4" *ngIf="ventas.length > 0">
   <h2 class="text-2xl font-semibold mb-4">Ventas Realizadas</h2>
 
   <table class="w-full border">
@@ -11,11 +11,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let pedido of clientes">
-        <td class="border px-2 py-1">{{ pedido.nombre }}</td>
-        <td class="border px-2 py-1">{{ pedido.direccion }}</td>
-        <td class="border px-2 py-1">{{ pedido.telefono }}</td>
-        <td class="border px-2 py-1">{{ pedido.totalCompra | currency }}</td>
+      <tr *ngFor="let venta of ventas">
+        <td class="border px-2 py-1">{{ venta.nombre }}</td>
+        <td class="border px-2 py-1">{{ venta.direccion }}</td>
+        <td class="border px-2 py-1">{{ venta.telefono }}</td>
+        <td class="border px-2 py-1">{{ venta.total | currency }}</td>
       </tr>
     </tbody>
   </table>
@@ -23,8 +23,8 @@
   <div class="mt-4 font-bold text-xl">
     Total General de Ventas: {{ totalGeneral | currency }}
   </div>
+</div>
 
-  <div class="mt-4">
-    <button (click)="ventas()" class="bg-blue-600 text-white px-4 py-2 rounded">Ver ventas</button>
-  </div>
+<div class="mt-4">
+  <button (click)="obtenerVentas()" class="bg-blue-600 text-white px-4 py-2 rounded">Ver ventas</button>
 </div>

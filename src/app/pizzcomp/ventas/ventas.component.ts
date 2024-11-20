@@ -1,23 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProyectoapiService } from '../bd.service';
 
-interface Pedido {
+interface Venta {
   nombre: string;
   direccion: string;
   telefono: string;
-  tamanoPizza: string;
-  ingrediente1: string;
-  ingrediente2: string;
-  ingrediente3: string;
-  numeroPizzas: number;
-  subtotal: number;
-}
-
-interface ClienteResumen {
-  nombre: string;
-  direccion: string;
-  telefono: string;
-  totalCompra: number;
+  total: number;
 }
 
 @Component({
@@ -25,38 +14,36 @@ interface ClienteResumen {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './ventas.component.html',
-  styles: ``
+  styles: ``,
 })
 export default class VentasComponent implements OnInit {
-  pedidos: Pedido[] = [];
-  clientes: ClienteResumen[] = [];
+  ventas: Venta[] = [];
   totalGeneral: number = 0;
 
-  ngOnInit() {
-    
+  constructor(private apiService: ProyectoapiService) {}
+
+  ngOnInit(): void {
   }
 
-  ventas() {
-    const pedidosGuardados: Pedido[] = JSON.parse(localStorage.getItem('pedidos') || '[]');
-    this.pedidos = pedidosGuardados;
-    const clienteMap: { [key: string]: ClienteResumen } = {};
-
-    this.pedidos.forEach((pedido) => {
-      const clienteKey = `${pedido.nombre}-${pedido.telefono}-${pedido.direccion}`;
-      
-      if (clienteMap[clienteKey]) {
-        clienteMap[clienteKey].totalCompra += pedido.subtotal;
-      } else {
-        clienteMap[clienteKey] = {
-          nombre: pedido.nombre,
-          direccion: pedido.direccion,
-          telefono: pedido.telefono,
-          totalCompra: pedido.subtotal
-        };
-      }
+  obtenerVentas() {
+    this.apiService.getVentas().subscribe({
+      next: (data) => {
+        if (data.exito) {
+          this.ventas = data.ventas; // Asigna los resultados de las ventas a la variable 'ventas'
+          this.calcularTotalGeneral(); // Calculamos el total general después de recibir los datos
+        } else {
+          alert('Error al obtener las ventas');
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener las ventas', err);
+        alert('Hubo un error al obtener las ventas');
+      },
     });
+  }
 
-    this.clientes = Object.values(clienteMap);
-    this.totalGeneral = this.clientes.reduce((total, cliente) => total + cliente.totalCompra, 0);
+  calcularTotalGeneral() {
+    // Asegúrate de que cada 'venta.total' se convierte a número antes de sumar
+    this.totalGeneral = this.ventas.reduce((total, venta) => total + Number(venta.total), 0);
   }
 }
