@@ -13,5 +13,10 @@ export default[
         path:'ventas',
         loadComponent:()=>import('./ventas/ventas.component'),
     }
+    ,
+    {
+        path:'gestionar-pedidos',
+        loadComponent:()=>import('./gestionar-pedidos/gestionar-pedidos.component'),
+    }
 
 ] as Routes

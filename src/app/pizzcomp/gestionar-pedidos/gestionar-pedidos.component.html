@@ -1,0 +1,57 @@
+<div class="p-6 bg-gray-100 rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold mb-6 text-center text-gray-700">Gestión de Pedidos</h2>
+
+  <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="py-2 px-4 text-left text-gray-600">Nombre</th>
+        <th class="py-2 px-4 text-left text-gray-600">Dirección</th>
+        <th class="py-2 px-4 text-left text-gray-600">Teléfono</th>
+        <th class="py-2 px-4 text-left text-gray-600">Tamaño Pizza</th>
+        <th class="py-2 px-4 text-left text-gray-600">Ingrediente 1</th>
+        <th class="py-2 px-4 text-left text-gray-600">Ingrediente 2</th>
+        <th class="py-2 px-4 text-left text-gray-600">Ingrediente 3</th>
+        <th class="py-2 px-4 text-left text-gray-600">Cantidad</th>
+        <th class="py-2 px-4 text-left text-gray-600">Subtotal</th>
+        <th class="py-2 px-4 text-left text-gray-600">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pedido of pedidos; let i = index" class="border-b">
+        <td class="py-2 px-4">
+          <input [(ngModel)]="pedido.nombre" [readonly]="!pedido.editando" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </td>
+        <td class="py-2 px-4">
+          <input [(ngModel)]="pedido.direccion" [readonly]="!pedido.editando" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </td>
+        <td class="py-2 px-4">
+          <input [(ngModel)]="pedido.telefono" [readonly]="!pedido.editando" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </td>
+        <td class="py-2 px-4">
+          <input [(ngModel)]="pedido.tamanoPizza" [readonly]="!pedido.editando" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </td>
+        <td class="py-2 px-4">
+          <input [(ngModel)]="pedido.ingrediente1" [readonly]="!pedido.editando" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </td>
+        <td class="py-2 px-4">
+          <input [(ngModel)]="pedido.ingrediente2" [readonly]="!pedido.editando" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </td>
+        <td class="py-2 px-4">
+          <input [(ngModel)]="pedido.ingrediente3" [readonly]="!pedido.editando" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </td>
+        <td class="py-2 px-4">
+          <input [(ngModel)]="pedido.numeroPizzas" [readonly]="!pedido.editando" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </td>
+        <td class="py-2 px-4">
+          <input [(ngModel)]="pedido.subtotal" [readonly]="!pedido.editando" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </td>
+        <td class="py-2 px-4 text-center space-x-2">
+          <button *ngIf="!pedido.editando" (click)="eliminarPedido(pedido.id!)" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">Eliminar</button>
+          <button *ngIf="!pedido.editando" (click)="activarEdicion(pedido)" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Editar</button>
+          <button *ngIf="pedido.editando" (click)="guardarCambios(pedido)" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">Guardar</button>
+          <button *ngIf="pedido.editando" (click)="cancelarEdicion(pedido, i)" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">Cancelar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,4 +1,4 @@
-<div class="p-4" *ngIf="ventas.length > 0">
+<div class="p-4">
   <h2 class="text-2xl font-semibold mb-4">Ventas Realizadas</h2>
 
   <table class="w-full border">
@@ -23,7 +23,9 @@
   <div class="mt-4 font-bold text-xl">
     Total General de Ventas: {{ totalGeneral | currency }}
   </div>
-</div>
+
+
+
 
 <div class="mt-4">
   <button (click)="obtenerVentas()" class="bg-blue-600 text-white px-4 py-2 rounded">Ver ventas</button>
